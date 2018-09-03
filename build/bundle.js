@@ -7012,8 +7012,9 @@ app.use('/', function (req, res) {
 
   res.send(content);
 });
+
 app.listen(3000, function () {
-  console.log('Listenign on port 3000');
+  console.log('Listening on port 3000');
 });
 
 /***/ }),
@@ -22127,7 +22128,7 @@ var Home = function Home() {
   return _react2.default.createElement(
     'div',
     null,
-    'I\'m the home component'
+    'I\'m the cool home component'
   );
 };
 
