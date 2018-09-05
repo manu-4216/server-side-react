@@ -31,6 +31,7 @@ const loadData = store => {
 
 export default {
   loadData,
+  // loadData: ({dispatch}) => dispatch(fetchUsers())  // Another way or writing this
   component: connect(
     mapStateToProps,
     { fetchUsers }
