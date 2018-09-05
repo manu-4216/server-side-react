@@ -24,9 +24,18 @@ app.get('*', (req, res) => {
   const store = createStore(req)
 
   // For each matched route, execute the 'loadData' imported by some components inside 'Routes'
-  const promises = matchRoutes(Routes, req.path).map(({ route }) => {
-    return route.loadData ? route.loadData(store) : null
-  })
+  const promises = matchRoutes(Routes, req.path)
+    .map(({ route }) => {
+      return route.loadData ? route.loadData(store) : null
+    })
+    // Wrap the promises into another promise, to allow for all the loadData to finish, rather that catch when the 1st one fails
+    .map(promise => {
+      if (promise) {
+        return new Promise((resolve, reject) => {
+          promise.then(resolve).catch(resolve)
+        })
+      }
+    })
 
   Promise.all(promises).then(() => {
     const context = {}
